@@ -5,33 +5,43 @@ const scissors = document.querySelector("#scissors")
 
 const buttons = document.querySelectorAll('button');
 
+let moves = ['rock', 'paper', 'scissors'];
+let playerScore = "0";
+let computerScore = "0";
+
 console.log("Make a selection!")
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     let buttonClicked = button.id;
     let computerSelection = computerPlay();
-    console.log(game(buttonClicked));
+    game(buttonClicked);
   });
 
 });
 
 
-
-
 function game(buttonClicked) {
 
+
+        if ((playerScore < 5) || (computerScore < 5)) {
         let playerSelection = buttonClicked;
         const computerSelection = computerPlay();
         console.log(playRound(playerSelection, computerSelection ));
         console.log(playerScore)
         console.log(computerScore)
+        update_score(playerScore, computerScore);
         console.log("Pick a new selection")
+        } 
+        if (playerScore >= 5) {
+            alert("You won you magnificent animal")
+        } else if (computerScore >= 5) {
+            alert("You really need to step up and do better. you just lost to a computer");
+        } 
+
        }
 
-       let moves = ['rock', 'paper', 'scissors'];
-       let playerScore = parseInt(0);
-       let computerScore = parseInt(0);
+
 
        function computerPlay() {
          return moves[Math.floor(Math.random() * moves.length)];
@@ -69,6 +79,11 @@ function game(buttonClicked) {
                 return "You tie try again";
            }
        }
+
+       function update_score(playerScore, computerScore) {
+        document.getElementById("newPlayerScore").textContent = playerScore.toString();
+        document.getElementById("newComputerScore").textContent = computerScore.toString();
+    }
 
 
 
